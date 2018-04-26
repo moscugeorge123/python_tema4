@@ -1,6 +1,6 @@
 import copy
 
-for fisier in [1, 2, 3, 4]:
+for fisier in range(1, 6):
     f = open('m_rar_2018_' + str(fisier) + '.txt', 'r')
     content_file = f.read()
     f.close()
@@ -33,10 +33,6 @@ for fisier in [1, 2, 3, 4]:
         elements[tmp[1]] += [tmp[0]]
         index[tmp[1]] += [tmp[2]]
 
-    # elements = [[12, 3, -5], [1, 5, 3], [3, 7, 13], [4, -5, 33]]
-    # index = [[0, 2, 3], [0, 1, 2], [0, 2, 3], [1, 2, 3]]
-    # B = [1, 28, 76, 44]
-
     diagonal_has_0_elements = False
     for i in range(0, len(diagonal)):
         if abs(diagonal[i]) < precision:
@@ -67,7 +63,7 @@ for fisier in [1, 2, 3, 4]:
         X_prev = [i + 1 for i in X]
         counter = 0
 
-        while not equal(X_prev, X) and counter < 250000:
+        while not equal(X_prev, X) and counter < 10000:
             X_prev = copy.copy(X)
             for i in range(0, len(elements)):
                 tmp = B[i]
@@ -77,11 +73,8 @@ for fisier in [1, 2, 3, 4]:
                         continue
 
                     tmp -= elements[i][j] * X[index[i][j]]
-                    # print("elements", elements[i][j], X[index[i][j]])
 
                 tmp /= elements[i][getIndex(i)]
-                # print("tmp", tmp, B[i])
-                # print(X[i], B[i], elements[i][getIndex(i)], tmp)
                 X[i] = tmp
 
             counter += 1
@@ -96,5 +89,4 @@ for fisier in [1, 2, 3, 4]:
             s -= B[i]
             finalResult += s * s
 
-        print("| Ax -  b | ", finalResult)
-        print(' ')
+        print("| Ax -  b | ", finalResult, '\n')
